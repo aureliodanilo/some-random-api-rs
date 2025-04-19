@@ -7,5 +7,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let types = client.animu_types().await?;
     println!("Available Animu types: {:?}", types.types);
 
+    let kiss = client.animu("kiss").await?;
+    println!("Animated Kiss {:?}", kiss);
+
+    let quote = client.animu_quote().await?;
+    println!("Animated Quote {:?}", quote);
+
     Ok(())
 }

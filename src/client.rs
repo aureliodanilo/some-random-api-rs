@@ -1,4 +1,4 @@
-use crate::models::{ AnimuTypes };
+use crate::models::{Animu, AnimuTypes, AnimuQuote, Animal, AnimalEndpoints};
 use reqwest::Client;
 use serde::de::DeserializeOwned;
 
@@ -28,6 +28,22 @@ impl SraClient {
     }
 
     pub async fn animu_types(&self) -> reqwest::Result<AnimuTypes> {
-        self.fetch::<AnimuTypes>("/animu").await
+        self.fetch("/animu").await
+    }
+
+    pub async fn animu(&self, kind: &str) -> reqwest::Result<Animu> {
+        self.fetch(&format!("/animu/{}", kind)).await
+    }
+
+    pub async fn animu_quote(&self) -> reqwest::Result<AnimuQuote> {
+        self.fetch(&format!("/animu/quote")).await
+    }
+
+    pub async fn animal_endpoints(&self) -> reqwest::Result<AnimalEndpoints> {
+        self.fetch("/animal").await
+    }
+
+    pub async fn animal(&self, kind: &str) -> reqwest::Result<Animal> {
+        self.fetch("/animal/endpoints").await
     }
 }
